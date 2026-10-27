@@ -3,17 +3,21 @@ import io
 import streamlit as st
 import plotly.graph_objects as go
 
+# ===============================================================
+# PAGE CONFIG
+# ===============================================================
+
 st.set_page_config(
     page_title="CVSync AI | INTELLIQ SOLVEX",
     page_icon="🎯",
     layout="wide"
 )
 
-# ---------------------------------------------------------------
-# SKILL DATABASE: canonical name -> (category, [synonyms])
-# ---------------------------------------------------------------
+# ===============================================================
+# SKILL DATABASE
+# ===============================================================
+
 SKILLS = {
-    # Languages
     "Python": ("Programming Languages", ["python", "python3"]),
     "Java": ("Programming Languages", ["java", "core java"]),
     "C++": ("Programming Languages", ["c++", "cpp"]),
@@ -25,7 +29,6 @@ SKILLS = {
     "Scala": ("Programming Languages", ["scala"]),
     "Bash/Shell": ("Programming Languages", ["bash", "shell scripting", "shell"]),
 
-    # Databases
     "SQL": ("Databases", ["sql", "t-sql", "pl/sql"]),
     "MySQL": ("Databases", ["mysql"]),
     "PostgreSQL": ("Databases", ["postgresql", "postgres"]),
@@ -34,7 +37,6 @@ SKILLS = {
     "SQLite": ("Databases", ["sqlite"]),
     "Firebase": ("Databases", ["firebase", "firestore"]),
 
-    # Data / ML
     "Machine Learning": ("Data Science & ML", ["machine learning", "ml"]),
     "Deep Learning": ("Data Science & ML", [
         "deep learning", "dl", "neural network", "neural networks"
@@ -65,7 +67,6 @@ SKILLS = {
         "feature engineering"
     ]),
 
-    # Libraries / Frameworks
     "Pandas": ("Libraries & Frameworks", ["pandas"]),
     "NumPy": ("Libraries & Frameworks", ["numpy"]),
     "Scikit-learn": ("Libraries & Frameworks", [
@@ -103,7 +104,6 @@ SKILLS = {
         "restful api", "api development"
     ]),
 
-    # Tools / Cloud / DevOps
     "Docker": ("Tools, Cloud & DevOps", [
         "docker", "containerization", "containers"
     ]),
@@ -141,7 +141,6 @@ SKILLS = {
         "spark", "pyspark", "hadoop"
     ]),
 
-    # CS fundamentals / soft skills
     "Data Structures & Algorithms": ("CS Fundamentals", [
         "data structures", "algorithms", "dsa"
     ]),
@@ -168,18 +167,20 @@ SKILLS = {
     ]),
 }
 
-# ---------------------------------------------------------------
-# EDUCATION PATTERNS
-# ---------------------------------------------------------------
+# ===============================================================
+# EDUCATION
+# ===============================================================
+
 EDU_PATTERNS = {
     "B.E / B.Tech": r"\b(b\.?\s?e\.?|b\.?\s?tech|bachelor(?:'s)?(?: of (?:engineering|technology))?)\b",
     "M.E / M.Tech": r"\b(m\.?\s?e\.?|m\.?\s?tech|master(?:'s)?(?: of (?:engineering|technology|science))?)\b",
     "Computer/AI/DS Degree": r"(computer science|information technology|artificial intelligence|data science|ai\s*&\s*ds|aids|cse)",
 }
 
-# ---------------------------------------------------------------
+# ===============================================================
 # SAMPLE DATA
-# ---------------------------------------------------------------
+# ===============================================================
+
 SAMPLE_JD = """Job Title: Machine Learning Engineer (Fresher / Entry Level)
 
 We are looking for a Machine Learning Engineer with 0-2 years of experience to join our AI team.
@@ -237,73 +238,45 @@ SAMPLE_BATCH = [
     "Python, PyTorch, Deep Learning, Computer Vision, OpenCV, Machine Learning, Pandas, NumPy, Git. Project: face mask detection using PyTorch and OpenCV. B.Tech Artificial Intelligence and Data Science. Problem solving, teamwork.",
 ]
 
-# ---------------------------------------------------------------
-# ROADMAP DATA
-# ---------------------------------------------------------------
+# ===============================================================
+# ROADMAP
+# ===============================================================
+
 PROJECT_IDEAS = {
     "Docker": "Dockerize your existing Flask/FastAPI project. Write a Dockerfile, build the image, run it and push to Docker Hub.",
-
-    "AWS": "Deploy your ML model API on an AWS EC2 free-tier instance and store the model file in an S3 bucket.",
-
-    "FastAPI": "Convert your ML model into a FastAPI service with a /predict endpoint and auto-generated Swagger docs.",
-
+    "AWS": "Deploy your ML model API on an AWS EC2 instance and store the model file in an S3 bucket.",
+    "FastAPI": "Convert your ML model into a FastAPI service with a /predict endpoint and Swagger docs.",
     "Flask": "Build a small Flask app with a form that takes input and returns an ML prediction.",
-
-    "SQL": "Design a 4-table database for a library system and write 15 queries (joins, group by, subqueries).",
-
-    "PostgreSQL": "Migrate a small project from SQLite to PostgreSQL and write 10 queries with joins and indexes.",
-
-    "Machine Learning": "Predict house prices end to end: EDA, feature engineering, 3 models, cross-validation, report.",
-
-    "Deep Learning": "Train a CNN on MNIST/CIFAR-10 and compare against a simple baseline model.",
-
-    "NLP": "Build a resume or review text classifier using TF-IDF and then a transformer model.",
-
-    "Generative AI / LLMs": "Build a PDF question-answering chatbot using RAG (embeddings + vector store + LLM).",
-
-    "CI/CD": "Add a GitHub Actions workflow that runs tests and lints your project on every push.",
-
-    "Git/GitHub": "Put 2 projects on GitHub with a proper README, branches and at least 20 meaningful commits.",
-
+    "SQL": "Design a 4-table database for a library system and write 15 queries using joins, group by and subqueries.",
+    "PostgreSQL": "Migrate a small project from SQLite to PostgreSQL and write queries with joins and indexes.",
+    "Machine Learning": "Predict house prices end to end: EDA, feature engineering, 3 models, cross-validation and report.",
+    "Deep Learning": "Train a CNN on MNIST/CIFAR-10 and compare it against a simple baseline.",
+    "NLP": "Build a text classifier using TF-IDF and then compare it with a transformer model.",
+    "Generative AI / LLMs": "Build a PDF question-answering chatbot using RAG.",
+    "CI/CD": "Add a GitHub Actions workflow that runs tests and linting on every push.",
+    "Git/GitHub": "Put 2 projects on GitHub with proper README files, branches and meaningful commits.",
     "Kubernetes": "Deploy a Dockerized app on Minikube with a Deployment and Service.",
-
-    "TensorFlow": "Train an image classifier with Keras and export it as a SavedModel.",
-
-    "PyTorch": "Implement a simple neural network training loop in PyTorch on a tabular dataset.",
-
-    "Pandas": "Take a messy Kaggle CSV and clean, merge and summarise it into a 1-page insights report.",
-
-    "NumPy": "Implement linear regression from scratch with NumPy only (gradient descent).",
-
-    "Scikit-learn": "Build a full sklearn Pipeline with preprocessing, GridSearchCV and model comparison.",
-
-    "Power BI": "Build a 3-page interactive dashboard on a public dataset (sales, attendance, etc).",
-
-    "Tableau": "Build a story dashboard on a public dataset and publish it to Tableau Public.",
-
-    "MLOps": "Track experiments with MLflow and package the best model with a simple serving script.",
-
-    "REST APIs": "Build a CRUD REST API for a to-do app with proper status codes and validation.",
-
-    "Linux": "Practice 30 core commands, write 3 shell scripts that automate file and log tasks.",
-
-    "Statistics": "Run hypothesis tests (t-test, chi-square) on a real dataset and explain the findings.",
+    "TensorFlow": "Train an image classifier with Keras and export the trained model.",
+    "PyTorch": "Implement a simple neural network training loop in PyTorch.",
+    "Pandas": "Take a messy CSV and clean, merge and summarise it into an insights report.",
+    "NumPy": "Implement linear regression from scratch using NumPy and gradient descent.",
+    "Scikit-learn": "Build an sklearn Pipeline with preprocessing, GridSearchCV and model comparison.",
+    "Power BI": "Build a 3-page interactive dashboard on a public dataset.",
+    "Tableau": "Build a story dashboard on a public dataset and publish it.",
+    "MLOps": "Track experiments with MLflow and package the best model.",
+    "REST APIs": "Build a CRUD REST API for a to-do application.",
+    "Linux": "Practice 30 core commands and write shell scripts for file and log automation.",
+    "Statistics": "Run hypothesis tests such as t-test and chi-square on a real dataset.",
 }
 
 DAY_TEMPLATE = [
-    "Understand what {s} is, why companies use it, and its core concepts. Watch one crash course.",
-
-    "Install / set up {s} and follow the official 'Getting Started' guide hands-on.",
-
-    "Learn the 5-6 most used features of {s} and practise with small exercises.",
-
-    "Solve 5-10 practice problems or tasks involving {s}.",
-
-    "Start the mini-project (below). Build the basic working version.",
-
+    "Understand what {s} is, why companies use it, and its core concepts.",
+    "Install / set up {s} and follow a beginner hands-on tutorial.",
+    "Learn the 5-6 most commonly used features of {s}.",
+    "Solve 5-10 practical exercises involving {s}.",
+    "Start the mini-project and build the basic working version.",
     "Finish and improve the mini-project. Add a README with screenshots.",
-
-    "Push to GitHub, add it to your resume under Projects/Skills, and prepare 3 interview answers on {s}.",
+    "Push to GitHub and prepare 3 interview answers on {s}.",
 ]
 
 LEVEL_WORDS = {
@@ -313,40 +286,54 @@ LEVEL_WORDS = {
     "low": (0, 35, "🔴 Low Alignment"),
 }
 
-# ---------------------------------------------------------------
-# CORE HELPERS
-# ---------------------------------------------------------------
+# ===============================================================
+# CORE FUNCTIONS
+# ===============================================================
 
 def extract_pdf_text(file_bytes: bytes) -> str:
+
     text = ""
 
     try:
         import pdfplumber
 
         with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
+
             for page in pdf.pages:
-                text += (page.extract_text() or "") + "\n"
+
+                text += (
+                    page.extract_text() or ""
+                ) + "\n"
 
     except Exception:
+
         text = ""
 
     if not text.strip():
 
         try:
+
             from pypdf import PdfReader
 
-            reader = PdfReader(io.BytesIO(file_bytes))
+            reader = PdfReader(
+                io.BytesIO(file_bytes)
+            )
 
             for page in reader.pages:
-                text += (page.extract_text() or "") + "\n"
+
+                text += (
+                    page.extract_text() or ""
+                ) + "\n"
 
         except Exception:
+
             pass
 
     return text
 
 
 def term_regex(term: str) -> re.Pattern:
+
     return re.compile(
         r"(?<![A-Za-z0-9+#])"
         + re.escape(term)
@@ -356,16 +343,23 @@ def term_regex(term: str) -> re.Pattern:
 
 
 def find_skills(text: str) -> set:
+
     found = set()
 
     for skill, (_, syns) in SKILLS.items():
 
-        for term in set([skill.lower()] + syns):
+        for term in set(
+            [skill.lower()] + syns
+        ):
 
-            if skill in ("C", "R", "Go") and term == skill.lower():
+            if (
+                skill in ("C", "R", "Go")
+                and term == skill.lower()
+            ):
                 continue
 
             if term_regex(term).search(text):
+
                 found.add(skill)
                 break
 
@@ -373,36 +367,57 @@ def find_skills(text: str) -> set:
 
 
 def split_lines(text: str):
+
     lines = []
 
-    for raw in re.split(r"[\n\r]+", text):
+    for raw in re.split(
+        r"[\n\r]+",
+        text
+    ):
 
-        raw = raw.strip(" -•*\t")
+        raw = raw.strip(
+            " -•*\t"
+        )
 
         if len(raw) > 3:
+
             lines.append(raw)
 
     return lines
 
 
-def evidence_for(skill: str, resume_text: str, limit: int = 2):
+def evidence_for(
+    skill: str,
+    resume_text: str,
+    limit: int = 2
+):
 
-    syns = set([skill.lower()] + SKILLS[skill][1])
+    syns = set(
+        [skill.lower()]
+        + SKILLS[skill][1]
+    )
 
     out = []
 
-    for line in split_lines(resume_text):
+    for line in split_lines(
+        resume_text
+    ):
 
         for term in syns:
 
-            if skill in ("C", "R", "Go") and term == skill.lower():
+            if (
+                skill in ("C", "R", "Go")
+                and term == skill.lower()
+            ):
                 continue
 
             if term_regex(term).search(line):
+
                 out.append(line)
                 break
 
         if len(out) >= limit:
+
             break
 
     return out
@@ -417,7 +432,11 @@ def parse_years(text: str):
     )
 
     if m:
-        return int(m.group(1)), int(m.group(2))
+
+        return (
+            int(m.group(1)),
+            int(m.group(2))
+        )
 
     m = re.search(
         r"(\d+)\s*\+?\s*years?",
@@ -426,27 +445,42 @@ def parse_years(text: str):
     )
 
     if m:
-        return int(m.group(1)), int(m.group(1))
+
+        return (
+            int(m.group(1)),
+            int(m.group(1))
+        )
 
     if re.search(
         r"\bfresher|entry[- ]level|graduate\b",
         text,
         re.IGNORECASE
     ):
+
         return 0, 1
 
     return None
 
 
-def resume_experience_signals(text: str) -> dict:
+def resume_experience_signals(
+    text: str
+):
 
     return {
         "internship": bool(
-            re.search(r"\bintern(ship)?\b", text, re.IGNORECASE)
+            re.search(
+                r"\bintern(ship)?\b",
+                text,
+                re.IGNORECASE
+            )
         ),
 
         "projects": len(
-            re.findall(r"\bproject", text, re.IGNORECASE)
+            re.findall(
+                r"\bproject",
+                text,
+                re.IGNORECASE
+            )
         ),
 
         "work": bool(
@@ -468,11 +502,20 @@ def detect_role(jd: str) -> str:
     )
 
     if m:
+
         return m.group(1).strip()
 
-    first = jd.strip().split("\n")[0].strip()
+    first = (
+        jd.strip()
+        .split("\n")[0]
+        .strip()
+    )
 
-    return first[:80] if first else "Not specified"
+    return (
+        first[:80]
+        if first
+        else "Not specified"
+    )
 
 
 def detect_edu(text: str) -> set:
@@ -480,11 +523,18 @@ def detect_edu(text: str) -> set:
     return {
         k
         for k, p in EDU_PATTERNS.items()
-        if re.search(p, text, re.IGNORECASE)
+        if re.search(
+            p,
+            text,
+            re.IGNORECASE
+        )
     }
 
 
-def classify_jd_skills(jd: str, jd_skills: set):
+def classify_jd_skills(
+    jd: str,
+    jd_skills: set
+):
 
     preferred = set()
     required = set()
@@ -492,10 +542,14 @@ def classify_jd_skills(jd: str, jd_skills: set):
     for skill in jd_skills:
 
         lines = [
-            l for l in split_lines(jd)
+            l
+            for l in split_lines(jd)
             if any(
                 term_regex(t).search(l)
-                for t in set([skill.lower()] + SKILLS[skill][1])
+                for t in set(
+                    [skill.lower()]
+                    + SKILLS[skill][1]
+                )
                 if not (
                     skill in ("C", "R", "Go")
                     and t == skill.lower()
@@ -503,24 +557,33 @@ def classify_jd_skills(jd: str, jd_skills: set):
             )
         ]
 
-        is_pref = bool(lines) and all(
-            re.search(
-                r"\b(plus|preferred|nice to have|good to have|bonus|desirable|optional|familiar)\b",
-                l,
-                re.IGNORECASE
+        is_pref = (
+            bool(lines)
+            and all(
+                re.search(
+                    r"\b(plus|preferred|nice to have|good to have|bonus|desirable|optional|familiar)\b",
+                    l,
+                    re.IGNORECASE
+                )
+                for l in lines
             )
-            for l in lines
         )
 
         if is_pref:
+
             preferred.add(skill)
+
         else:
+
             required.add(skill)
 
     return required, preferred
 
 
-def analyse(resume: str, jd: str) -> dict:
+def analyse(
+    resume: str,
+    jd: str
+) -> dict:
 
     jd_skills = find_skills(jd)
     res_skills = find_skills(resume)
@@ -530,19 +593,33 @@ def analyse(resume: str, jd: str) -> dict:
         jd_skills
     )
 
-    matched_req = required & res_skills
-    matched_pref = preferred & res_skills
+    matched_req = (
+        required & res_skills
+    )
 
-    missing_req = required - res_skills
-    missing_pref = preferred - res_skills
+    matched_pref = (
+        preferred & res_skills
+    )
 
-    extra = res_skills - jd_skills
+    missing_req = (
+        required - res_skills
+    )
 
-    # Weighted skill score
-    total_w = len(required) * 1.0 + len(preferred) * 0.5
+    missing_pref = (
+        preferred - res_skills
+    )
+
+    extra = (
+        res_skills - jd_skills
+    )
+
+    total_w = (
+        len(required)
+        + len(preferred) * 0.5
+    )
 
     got_w = (
-        len(matched_req) * 1.0
+        len(matched_req)
         + len(matched_pref) * 0.5
     )
 
@@ -552,13 +629,17 @@ def analyse(resume: str, jd: str) -> dict:
         else 0
     )
 
-    # Experience alignment
     yrs = parse_years(jd)
 
-    sig = resume_experience_signals(resume)
+    sig = resume_experience_signals(
+        resume
+    )
 
     exp_score = 70
-    exp_note = "No clear experience requirement found in JD."
+
+    exp_note = (
+        "No clear experience requirement found in JD."
+    )
 
     if yrs is not None:
 
@@ -566,12 +647,16 @@ def analyse(resume: str, jd: str) -> dict:
 
             exp_score = (
                 100
-                if (sig["projects"] or sig["internship"])
+                if (
+                    sig["projects"]
+                    or sig["internship"]
+                )
                 else 60
             )
 
             exp_note = (
-                f"JD expects fresher level ({yrs[0]}-{yrs[1]} yrs). "
+                f"JD expects fresher level "
+                f"({yrs[0]}-{yrs[1]} yrs). "
                 "Resume shows "
                 + (
                     "projects/internship — good fit."
@@ -584,9 +669,13 @@ def analyse(resume: str, jd: str) -> dict:
 
             exp_score = (
                 85
-                if sig["work"] and sig["internship"]
+                if sig["work"]
+                and sig["internship"]
                 else 55
-                if (sig["internship"] or sig["work"])
+                if (
+                    sig["internship"]
+                    or sig["work"]
+                )
                 else 35
             )
 
@@ -600,7 +689,6 @@ def analyse(resume: str, jd: str) -> dict:
                 )
             )
 
-    # Education alignment
     edu_resume = detect_edu(resume)
     edu_jd = detect_edu(jd)
 
@@ -608,7 +696,9 @@ def analyse(resume: str, jd: str) -> dict:
 
         edu_score = (
             100
-            if (edu_resume & edu_jd)
+            if (
+                edu_resume & edu_jd
+            )
             else 50
         )
 
@@ -621,7 +711,10 @@ def analyse(resume: str, jd: str) -> dict:
     else:
 
         edu_score = 80
-        edu_note = "No clear education requirement in JD."
+
+        edu_note = (
+            "No clear education requirement in JD."
+        )
 
     final = round(
         0.70 * skill_score
@@ -631,37 +724,48 @@ def analyse(resume: str, jd: str) -> dict:
 
     label = "🔴 Low Alignment"
 
-    for _, (lo, hi, name) in LEVEL_WORDS.items():
+    for _, (
+        lo,
+        hi,
+        name
+    ) in LEVEL_WORDS.items():
 
         if lo <= final < hi:
+
             label = name
 
-    return dict(
-        role=detect_role(jd),
-        final=final,
-        label=label,
-        skill_score=round(skill_score),
-        exp_score=exp_score,
-        exp_note=exp_note,
-        edu_score=edu_score,
-        edu_note=edu_note,
-        required=required,
-        preferred=preferred,
-        matched_req=matched_req,
-        matched_pref=matched_pref,
-        missing_req=missing_req,
-        missing_pref=missing_pref,
-        extra=extra,
-        jd_skills=jd_skills,
-        res_skills=res_skills,
-    )
+    return {
+        "role": detect_role(jd),
+        "final": final,
+        "label": label,
+        "skill_score": round(skill_score),
+        "exp_score": exp_score,
+        "exp_note": exp_note,
+        "edu_score": edu_score,
+        "edu_note": edu_note,
+        "required": required,
+        "preferred": preferred,
+        "matched_req": matched_req,
+        "matched_pref": matched_pref,
+        "missing_req": missing_req,
+        "missing_pref": missing_pref,
+        "extra": extra,
+        "jd_skills": jd_skills,
+        "res_skills": res_skills,
+    }
 
 
-def priority_order(missing: set, required: set):
+def priority_order(
+    missing: set,
+    required: set
+):
 
     return sorted(
         missing,
-        key=lambda s: (s not in required, s)
+        key=lambda s: (
+            s not in required,
+            s
+        )
     )
 
 
@@ -679,6 +783,10 @@ def make_roadmap(skill: str):
 
     return days, project
 
+
+# ===============================================================
+# CHARTS
+# ===============================================================
 
 def gauge(value: int):
 
@@ -698,8 +806,12 @@ def gauge(value: int):
             value=value,
             number={"suffix": "%"},
             gauge={
-                "axis": {"range": [0, 100]},
-                "bar": {"color": color},
+                "axis": {
+                    "range": [0, 100]
+                },
+                "bar": {
+                    "color": color
+                },
                 "steps": [
                     {
                         "range": [0, 35],
@@ -746,11 +858,15 @@ def category_chart(res: dict):
 
         c = SKILLS[s][0]
 
-        cats.setdefault(c, [0, 0])
+        cats.setdefault(
+            c,
+            [0, 0]
+        )
 
         cats[c][1] += 1
 
         if s in res["res_skills"]:
+
             cats[c][0] += 1
 
     names = list(cats.keys())
@@ -824,7 +940,9 @@ def build_report(res: dict) -> str:
         "MISSING (required): "
         + (
             ", ".join(
-                sorted(res["missing_req"])
+                sorted(
+                    res["missing_req"]
+                )
             )
             or "None"
         )
@@ -834,7 +952,9 @@ def build_report(res: dict) -> str:
         "MISSING (preferred): "
         + (
             ", ".join(
-                sorted(res["missing_pref"])
+                sorted(
+                    res["missing_pref"]
+                )
             )
             or "None"
         )
@@ -868,58 +988,76 @@ def build_report(res: dict) -> str:
     return "\n".join(L)
 
 
-# ---------------------------------------------------------------
-# UI
-# ---------------------------------------------------------------
+# ===============================================================
+# GLOBAL UI STYLE
+# ===============================================================
 
 st.markdown(
     """
     <style>
-    .chip{
+
+    .chip {
         display:inline-block;
         padding:4px 12px;
         margin:3px;
         border-radius:16px;
         font-size:0.9rem;
-        font-weight:500
+        font-weight:500;
     }
 
-    .ok{
+    .ok {
         background:#e6f9ee;
         color:#137a3d;
-        border:1px solid #9fe0b8
+        border:1px solid #9fe0b8;
     }
 
-    .no{
+    .no {
         background:#fdecea;
         color:#b3261e;
-        border:1px solid #f5b5b0
+        border:1px solid #f5b5b0;
     }
 
-    .pf{
+    .pf {
         background:#fff6e0;
         color:#8a6100;
-        border:1px solid #f0d58c
+        border:1px solid #f0d58c;
     }
 
-    .ev{
+    .ev {
         background:#f4f6fb;
         border-left:4px solid #4a6cf7;
         padding:8px 12px;
         margin:4px 0;
         border-radius:4px;
         color:#222;
-        font-size:0.9rem
+        font-size:0.9rem;
     }
+
     </style>
     """,
     unsafe_allow_html=True
 )
 
+# ===============================================================
+# SESSION STATE
+# ===============================================================
 
-# ---------------------------------------------------------------
-# CVSync AI BRANDING
-# ---------------------------------------------------------------
+if "resume_text" not in st.session_state:
+
+    st.session_state.resume_text = ""
+
+if "jd_text" not in st.session_state:
+
+    st.session_state.jd_text = ""
+
+if "started" not in st.session_state:
+
+    st.session_state.started = False
+
+
+# ===============================================================
+# CVSYNC AI BRANDING
+# ===============================================================
 
 st.title("🎯 CVSync AI")
 
@@ -929,16 +1067,9 @@ st.caption(
 )
 
 
-if "resume_text" not in st.session_state:
-    st.session_state.resume_text = ""
-
-if "jd_text" not in st.session_state:
-    st.session_state.jd_text = ""
-
-
-# ---------------------------------------------------------------
+# ===============================================================
 # SINGLE RESUME VIEW
-# ---------------------------------------------------------------
+# ===============================================================
 
 def single_view():
 
@@ -946,7 +1077,9 @@ def single_view():
 
     with c0:
 
-        if st.button("⚡ Load demo data"):
+        if st.button(
+            "⚡ Load demo data"
+        ):
 
             st.session_state.resume_text = SAMPLE_RESUME
             st.session_state.jd_text = SAMPLE_JD
@@ -958,9 +1091,7 @@ def single_view():
             "Click **Analyse**. Or press **Load demo data** to try instantly."
         )
 
-
     left, right = st.columns(2)
-
 
     # -----------------------------------------------------------
     # RESUME
@@ -968,7 +1099,9 @@ def single_view():
 
     with left:
 
-        st.subheader("1️⃣ Student Resume")
+        st.subheader(
+            "1️⃣ Student Resume"
+        )
 
         up = st.file_uploader(
             "Upload resume (PDF or TXT)",
@@ -1006,14 +1139,15 @@ def single_view():
             height=260
         )
 
-
     # -----------------------------------------------------------
     # JOB DESCRIPTION
     # -----------------------------------------------------------
 
     with right:
 
-        st.subheader("2️⃣ Job Description")
+        st.subheader(
+            "2️⃣ Job Description"
+        )
 
         jup = st.file_uploader(
             "Upload JD (optional, PDF or TXT)",
@@ -1035,6 +1169,7 @@ def single_view():
             )
 
             if txt.strip():
+
                 st.session_state.jd_text = txt
 
         st.session_state.jd_text = st.text_area(
@@ -1042,7 +1177,6 @@ def single_view():
             st.session_state.jd_text,
             height=260
         )
-
 
     # -----------------------------------------------------------
     # ANALYSE
@@ -1053,7 +1187,6 @@ def single_view():
         type="primary",
         use_container_width=True
     )
-
 
     if go_btn:
 
@@ -1080,16 +1213,13 @@ def single_view():
                     "Try a more detailed JD."
                 )
 
-
             st.divider()
 
             st.header(
                 f"Result for: {res['role']}"
             )
 
-
             a, b = st.columns([1, 1])
-
 
             with a:
 
@@ -1102,14 +1232,12 @@ def single_view():
                     res["label"]
                 )
 
-
             with b:
 
                 st.plotly_chart(
                     category_chart(res),
                     use_container_width=True
                 )
-
 
             # ---------------------------------------------------
             # SCORE CARDS
@@ -1132,19 +1260,16 @@ def single_view():
                 f"{res['edu_score']}%"
             )
 
-
             st.caption(
                 f"📌 {res['exp_note']}  \n"
                 f"🎓 {res['edu_note']}"
             )
-
 
             st.warning(
                 "⚠️ This score shows **resume-to-job-description "
                 "alignment only**. It is **not** a prediction of "
                 "hiring probability or a guarantee of selection."
             )
-
 
             # ---------------------------------------------------
             # TABS
@@ -1158,7 +1283,6 @@ def single_view():
                     "💡 Extras & Tips"
                 ]
             )
-
 
             # ---------------------------------------------------
             # TAB 1
@@ -1184,7 +1308,6 @@ def single_view():
                     unsafe_allow_html=True
                 )
 
-
                 st.markdown(
                     "**Required by company, missing from resume**"
                 )
@@ -1192,12 +1315,13 @@ def single_view():
                 st.markdown(
                     "".join(
                         f"<span class='chip no'>✘ {s}</span>"
-                        for s in sorted(res["missing_req"])
+                        for s in sorted(
+                            res["missing_req"]
+                        )
                     )
                     or "_None 🎉_",
                     unsafe_allow_html=True
                 )
-
 
                 if res["missing_pref"]:
 
@@ -1215,11 +1339,9 @@ def single_view():
                         unsafe_allow_html=True
                     )
 
-
                 st.markdown(
                     "**Technical skill-gap table**"
                 )
-
 
                 rows = []
 
@@ -1248,13 +1370,11 @@ def single_view():
                         }
                     )
 
-
                 st.dataframe(
                     rows,
                     use_container_width=True,
                     hide_index=True
                 )
-
 
             # ---------------------------------------------------
             # TAB 2
@@ -1271,14 +1391,12 @@ def single_view():
                     | res["matched_pref"]
                 )
 
-
                 if not matched_all:
 
                     st.info(
                         "No matching skills found, "
                         "so no evidence to show."
                     )
-
 
                 for s in matched_all:
 
@@ -1295,7 +1413,6 @@ def single_view():
                             f"<div class='ev'>“{line}”</div>",
                             unsafe_allow_html=True
                         )
-
 
                 weak = [
                     s
@@ -1315,7 +1432,6 @@ def single_view():
                     )[0].lower()
                 ]
 
-
                 if weak:
 
                     st.warning(
@@ -1324,7 +1440,6 @@ def single_view():
                         + ", ".join(weak)
                         + ". Add a project line showing how you used them."
                     )
-
 
             # ---------------------------------------------------
             # TAB 3
@@ -1338,14 +1453,12 @@ def single_view():
                     res["required"]
                 )
 
-
                 if not gaps:
 
                     st.success(
                         "No gaps found. Your resume covers "
                         "all detected JD skills!"
                     )
-
 
                 for s in gaps:
 
@@ -1357,10 +1470,11 @@ def single_view():
                         else "Nice-to-have"
                     )
 
-
                     with st.expander(
                         f"{s}  ·  {tag}",
-                        expanded=(s == gaps[0])
+                        expanded=(
+                            s == gaps[0]
+                        )
                     ):
 
                         for i, d in enumerate(
@@ -1372,12 +1486,10 @@ def single_view():
                                 f"**Day {i}:** {d}"
                             )
 
-
                         st.success(
                             f"🛠️ Mini-project to add to resume: "
                             f"{project}"
                         )
-
 
             # ---------------------------------------------------
             # TAB 4
@@ -1390,24 +1502,22 @@ def single_view():
                     "(still good to keep)"
                 )
 
-
                 st.markdown(
                     "".join(
                         f"<span class='chip pf'>{s}</span>"
-                        for s in sorted(res["extra"])
+                        for s in sorted(
+                            res["extra"]
+                        )
                     )
                     or "_None_",
                     unsafe_allow_html=True
                 )
 
-
                 st.markdown(
                     "**Suggested improvements**"
                 )
 
-
                 tips = []
-
 
                 if res["missing_req"]:
 
@@ -1415,7 +1525,6 @@ def single_view():
                         f"Focus first on: "
                         f"{', '.join(priority_order(res['missing_req'], res['required'])[:3])}."
                     )
-
 
                 tips.append(
                     "Add numbers to project bullets "
@@ -1432,13 +1541,11 @@ def single_view():
                     "above skills with none."
                 )
 
-
                 for t in tips:
 
                     st.markdown(
                         f"- {t}"
                     )
-
 
             # ---------------------------------------------------
             # DOWNLOAD REPORT
@@ -1451,9 +1558,9 @@ def single_view():
             )
 
 
-# ---------------------------------------------------------------
+# ===============================================================
 # CAMPUS BATCH VIEW
-# ---------------------------------------------------------------
+# ===============================================================
 
 def batch_view():
 
@@ -1469,14 +1576,12 @@ def batch_view():
         "so the dashboard shows only batch-level skill gaps."
     )
 
-
     st.session_state.jd_text = st.text_area(
         "Job Description for this batch",
         st.session_state.jd_text,
         height=180,
         key="batch_jd"
     )
-
 
     files = st.file_uploader(
         "Upload multiple resumes (PDF/TXT)",
@@ -1485,11 +1590,9 @@ def batch_view():
         key="batch_files"
     )
 
-
     use_sample = st.button(
         "⚡ Use 6 sample students + sample JD"
     )
-
 
     if use_sample:
 
@@ -1501,14 +1604,11 @@ def batch_view():
 
             st.rerun()
 
-
     if files:
 
         st.session_state.batch_sample = False
 
-
     resumes = []
-
 
     if files:
 
@@ -1527,13 +1627,11 @@ def batch_view():
 
             resumes.append(t)
 
-
     elif st.session_state.get(
         "batch_sample"
     ):
 
         resumes = SAMPLE_BATCH
-
 
     if not resumes:
 
@@ -1543,7 +1641,6 @@ def batch_view():
 
         return
 
-
     if not st.session_state.jd_text.strip():
 
         st.error(
@@ -1551,7 +1648,6 @@ def batch_view():
         )
 
         return
-
 
     results = [
         analyse(
@@ -1561,9 +1657,7 @@ def batch_view():
         for t in resumes
     ]
 
-
     n = len(results)
-
 
     avg = round(
         sum(
@@ -1572,13 +1666,11 @@ def batch_view():
         ) / n
     )
 
-
     ready = sum(
         1
         for r in results
         if r["final"] >= 60
     )
-
 
     # -----------------------------------------------------------
     # METRICS
@@ -1586,24 +1678,20 @@ def batch_view():
 
     k1, k2, k3 = st.columns(3)
 
-
     k1.metric(
         "Students analysed",
         n
     )
-
 
     k2.metric(
         "Average alignment",
         f"{avg}%"
     )
 
-
     k3.metric(
         "Strong / Good alignment",
         f"{ready} of {n}"
     )
-
 
     # -----------------------------------------------------------
     # GAP ANALYSIS
@@ -1613,9 +1701,7 @@ def batch_view():
         results[0]["jd_skills"]
     )
 
-
     gap_rows = []
-
 
     for s in jd_all:
 
@@ -1625,27 +1711,30 @@ def batch_view():
             if s in r["res_skills"]
         )
 
-
         gap_rows.append(
             (
                 s,
                 round(
                     (n - have) / n * 100
                 ),
-                results[0]["required"].__contains__(s)
+                s in results[0]["required"]
             )
         )
-
 
     gap_rows.sort(
         key=lambda x: -x[1]
     )
 
-
     fig = go.Figure(
         go.Bar(
-            x=[g[1] for g in gap_rows],
-            y=[g[0] for g in gap_rows],
+            x=[
+                g[1]
+                for g in gap_rows
+            ],
+            y=[
+                g[0]
+                for g in gap_rows
+            ],
             orientation="h",
             marker_color=[
                 "#e74c3c"
@@ -1658,7 +1747,6 @@ def batch_view():
         )
     )
 
-
     fig.update_layout(
         title="% of students MISSING each skill",
         xaxis_title="% of batch missing",
@@ -1666,9 +1754,9 @@ def batch_view():
             320,
             28 * len(gap_rows) + 100
         ),
-        yaxis=dict(
-            autorange="reversed"
-        ),
+        yaxis={
+            "autorange": "reversed"
+        },
         margin=dict(
             l=20,
             r=20,
@@ -1677,19 +1765,16 @@ def batch_view():
         )
     )
 
-
     st.plotly_chart(
         fig,
         use_container_width=True
     )
-
 
     top = [
         g
         for g in gap_rows
         if g[1] >= 50
     ]
-
 
     if top:
 
@@ -1703,7 +1788,6 @@ def batch_view():
             + ". A workshop on these would benefit "
               "the most students."
         )
-
 
     # -----------------------------------------------------------
     # SCORE DISTRIBUTION
@@ -1720,7 +1804,6 @@ def batch_view():
         )
     )
 
-
     hist.update_layout(
         title="Distribution of alignment scores",
         xaxis_title="Score (%)",
@@ -1734,12 +1817,10 @@ def batch_view():
         )
     )
 
-
     st.plotly_chart(
         hist,
         use_container_width=True
     )
-
 
     # -----------------------------------------------------------
     # RANKING
@@ -1749,7 +1830,6 @@ def batch_view():
         range(n),
         key=lambda i: -results[i]["final"]
     )
-
 
     rows = [
         {
@@ -1768,11 +1848,9 @@ def batch_view():
         for i in order
     ]
 
-
     st.markdown(
         "**Ranked list (anonymised)**"
     )
-
 
     st.dataframe(
         rows,
@@ -1780,13 +1858,11 @@ def batch_view():
         hide_index=True
     )
 
-
     # -----------------------------------------------------------
     # CSV DOWNLOAD
     # -----------------------------------------------------------
 
     buf = io.StringIO()
-
 
     w = csv.DictWriter(
         buf,
@@ -1795,18 +1871,15 @@ def batch_view():
         )
     )
 
-
     w.writeheader()
 
     w.writerows(rows)
-
 
     st.download_button(
         "⬇️ Download batch report (CSV)",
         buf.getvalue(),
         file_name="cv_sync_batch_report.csv"
     )
-
 
     st.caption(
         "Scores show resume-to-JD alignment only, "
@@ -1815,32 +1888,266 @@ def batch_view():
     )
 
 
-# ---------------------------------------------------------------
-# MODE SELECTION
-# ---------------------------------------------------------------
+# ===============================================================
+# LANDING PAGE
+# ===============================================================
 
-mode = st.radio(
-    "Mode",
-    [
-        "👤 Single Resume",
-        "🏫 Campus Batch"
-    ],
-    horizontal=True
-)
+if not st.session_state.started:
+
+    st.markdown(
+        """
+        <style>
+
+        .hero {
+            padding: 70px 30px 60px 30px;
+            text-align: center;
+            border-radius: 28px;
+            background: linear-gradient(
+                135deg,
+                #eef2ff,
+                #fdf2f8,
+                #ecfeff
+            );
+            margin-bottom: 35px;
+        }
+
+        .hero-icon {
+            font-size: 72px;
+        }
+
+        .hero-title {
+            font-size: 54px;
+            font-weight: 800;
+            margin: 8px 0;
+        }
+
+        .hero-subtitle {
+            font-size: 21px;
+            color: #555;
+            margin-bottom: 18px;
+        }
+
+        .hero-text {
+            font-size: 16px;
+            color: #666;
+            max-width: 760px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        .feature {
+            padding: 25px;
+            border-radius: 20px;
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            min-height: 165px;
+        }
+
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        """
+        <div class="hero">
+
+            <div class="hero-icon">🎯</div>
+
+            <div class="hero-title">
+                CVSync AI
+            </div>
+
+            <div class="hero-subtitle">
+                AI Resume Intelligence & Career Matching Platform
+            </div>
+
+            <div class="hero-text">
+                Analyse your resume against real job descriptions,
+                identify missing skills, measure alignment and get
+                a personalised roadmap to improve your career readiness.
+            </div>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    f1, f2, f3 = st.columns(3)
+
+    with f1:
+
+        st.markdown(
+            """
+            <div class="feature">
+
+            <h3>📄 Resume Analysis</h3>
+
+            <p>
+            Upload your resume and identify your
+            technical skills, education and experience.
+            </p>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with f2:
+
+        st.markdown(
+            """
+            <div class="feature">
+
+            <h3>🎯 Job Matching</h3>
+
+            <p>
+            Compare your resume with a job description
+            and calculate the alignment score.
+            </p>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with f3:
+
+        st.markdown(
+            """
+            <div class="feature">
+
+            <h3>🗺️ Skill Roadmap</h3>
+
+            <p>
+            Find missing skills and get a practical
+            7-day learning roadmap.
+            </p>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    st.write("")
+
+    st.markdown(
+        """
+        <div style="
+            text-align:center;
+            margin-top:25px;
+            margin-bottom:10px;
+        ">
+        <h3>Ready to check your career alignment?</h3>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    c1, c2, c3 = st.columns(
+        [1, 2, 1]
+    )
+
+    with c2:
+
+        if st.button(
+            "🚀 Get Started",
+            type="primary",
+            use_container_width=True
+        ):
+
+            st.session_state.started = True
+
+            st.rerun()
+
+    st.markdown(
+        """
+        <div style="
+            text-align:center;
+            margin-top:40px;
+            color:#888;
+        ">
+
+        <b>CVSync AI</b> · INTELLIQ SOLVEX · Dept. of AI&DS
+
+        <br>
+
+        <small>
+        Resume → Skill Gap → Career Roadmap
+        </small>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
-if mode.startswith("👤"):
-
-    single_view()
+# ===============================================================
+# MAIN APPLICATION
+# ===============================================================
 
 else:
 
-    batch_view()
+    st.markdown(
+        """
+        <div style="
+            padding:15px 20px;
+            border-radius:15px;
+            background:linear-gradient(
+                90deg,
+                #eef2ff,
+                #fdf2f8
+            );
+            margin-bottom:20px;
+        ">
+
+        <h2 style="margin:0;">
+        🎯 CVSync AI
+        </h2>
+
+        <p style="
+            margin:5px 0 0 0;
+            color:#666;
+        ">
+        AI Resume–Job Matching & Skill Gap Analyzer
+        </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Back button
+
+    if st.button(
+        "← Back to Home"
+    ):
+
+        st.session_state.started = False
+
+        st.rerun()
+
+    mode = st.radio(
+        "Choose Analysis Mode",
+        [
+            "👤 Single Resume",
+            "🏫 Campus Batch"
+        ],
+        horizontal=True
+    )
+
+    if mode.startswith("👤"):
+
+        single_view()
+
+    else:
+
+        batch_view()
 
 
-# ---------------------------------------------------------------
+# ===============================================================
 # FOOTER
-# ---------------------------------------------------------------
+# ===============================================================
 
 st.divider()
 
