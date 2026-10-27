@@ -599,3 +599,4 @@ PROJECT_IDEAS = {
         "Design a 4-table database and write 15 queries using JOIN, GROUP BY and subqueries.",
 
     "Pandas":
+}
