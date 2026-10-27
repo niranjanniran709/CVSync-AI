@@ -1,4 +1,4 @@
-streamlit
-plotly
-pdf plumber
-pypdf
+streamlit==1.39.0
+plotly==5.24.1
+pdfplumber==0.11.4
+pypdf==5.1.0
